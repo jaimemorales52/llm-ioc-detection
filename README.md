@@ -86,12 +86,6 @@ Controllers expose REST endpoints that accept source code (single files or direc
   - whether an IoC is present (`YES` / `NO` / `DON'T_KNOW`),
   - the recovered secret value (e.g., IP address) when available.
 
-Typical path pattern (adapt to your mappings):
-
-- `/api/openai/ioc/detect`
-- `/api/gemini/ioc/detect`
-- `/api/files/ioc/detect-directory`
-
 ### 1.4. `dao`
 
 `com.phd.llm.dao`
@@ -116,7 +110,7 @@ They map provider‑specific JSON to a common internal representation of IoC det
 
 - `decision`: `YES` / `NO` / `DON'T_KNOW`
 - `iocType`: `"IP"` (can be extended to domains, hashes, etc.)
-- `iocValue`: the recovered secret (e.g., `"192.0.2.1"`)
+- `iocValue`: the recovered secret (e.g., `"192.168.17.65"`)
 - `rawText`: raw provider response (for debugging)
 
 ### 1.6. `service` and `service.impl`
@@ -225,9 +219,7 @@ chatgpt.password=CHANGEMEAPIKEY
 cohere.password=CHANGEMEAPIKEY
 cohere.test.password=CHANGEMEAPIKEY
 anthropic.password=CHANGEMEAPIKEY
-krok.password=CHANGEMEAPIKEY
-Before running the backend, replace each CHANGEMEAPIKEY with the actual key for that provider.
-Ensure that keys.properties is ignored by version control or that you only commit a sanitized version containing placeholders.
+gkrok.password=CHANGEMEAPIKEY
 ```
 
 The specific model used for each provider is configured in the corresponding client class. By default, the backend is set up to call GPT‑4 Turbo (OpenAI, 2024, 128k), Gemini 1.5 Pro (Google, 2025, 1M), Claude 3 Sonnet (Anthropic, 2024, 200k), Grok‑2 (xAI, 2024, 128k), and Command‑R7B (Cohere, 2024, 128k).
@@ -248,12 +240,6 @@ The specific model used for each provider is configured in the corresponding cli
 ```bash
 git clone https://github.com/jaimemorales52/llm-ioc-detection.git
 cd llm-ioc-detection
-```
-
-Copy the example configuration and fill in your keys:
-
-```bash
-cp src/main/resources/application-example.properties src/main/resources/application.properties
 ```
 
 Edit `src/main/resources/keys.properties` and replace the `CHANGE_ME_...` values with your real API keys.
@@ -288,7 +274,7 @@ http://localhost:8080
 
 ## 5. Typical API usage
 
-To run IoC detection you only need to provide a single JavaScript file: the backend takes care of embedding the IP, applying the obfuscation/encryption phases, and querying the LLMs, so no JSON payload or folder path is required.
+To run IoC detection you only need to provide a single JavaScript file or Folder: the backend takes care of embedding the IP, applying the obfuscation/encryption phases, and querying the LLMs.
 
 ---
 
@@ -310,13 +296,18 @@ File: name of the JavaScript file / variant.
 
 Example snippet of the results table, showing a few phases for one provider:
 
-Phase	Contains IP	Extracted IP	Is Target IP	LLM	File
-flag	YES	192.168.17.65	true	Grok	flagBinaryConvert.js
-base64	YES	192.168.17.65	true	Grok	base64BinaryConvert.js
-obfus	YES	192.168.17.65	true	Grok	obfusBinaryConvert.js
-superobfus	YES	192.168.17.65	true	Grok	superobfusBinaryConvert.js
-anonymize	YES	192.168.17.65	true	Grok	anonymizeBinaryConvert.js
-decryptedXOR	NO		false	Grok	decryptedXORBinaryConvert.js
+Example snippet of the results table, showing a few phases for one provider:
+
+| Phase        | Contains IP | Extracted IP    | Is Target IP | LLM  | File                         |
+|-------------|-------------|-----------------|--------------|------|------------------------------|
+| flag        | YES         | 192.168.17.65   | true         | Grok | flagBinaryConvert.js         |
+| base64      | YES         | 192.168.17.65   | true         | Grok | base64BinaryConvert.js       |
+| obfus       | YES         | 192.168.17.65   | true         | Grok | obfusBinaryConvert.js        |
+| superobfus  | YES         | 192.168.17.65   | true         | Grok | superobfusBinaryConvert.js   |
+| anonymize   | YES         | 192.168.17.65   | true         | Grok | anonymizeBinaryConvert.js    |
+| decryptedXOR| NO          |                 | false        | Grok | decryptedXORBinaryConvert.js |
+
+
 This format makes it straightforward to see, for each model and phase, whether it correctly finds the embedded IP, misses it, or hallucinates a different address.
 
 
