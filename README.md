@@ -296,16 +296,21 @@ File: name of the JavaScript file / variant.
 
 Example snippet of the results table, showing a few phases for one provider:
 
-Example snippet of the results table, showing a few phases for one provider:
-
-| Phase        | Contains IP | Extracted IP    | Is Target IP | LLM  | File                         |
-|-------------|-------------|-----------------|--------------|------|------------------------------|
-| flag        | YES         | 192.168.17.65   | true         | Grok | flagBinaryConvert.js         |
-| base64      | YES         | 192.168.17.65   | true         | Grok | base64BinaryConvert.js       |
-| obfus       | YES         | 192.168.17.65   | true         | Grok | obfusBinaryConvert.js        |
-| superobfus  | YES         | 192.168.17.65   | true         | Grok | superobfusBinaryConvert.js   |
-| anonymize   | YES         | 192.168.17.65   | true         | Grok | anonymizeBinaryConvert.js    |
-| decryptedXOR| NO          |                 | false        | Grok | decryptedXORBinaryConvert.js |
+| Phase                       | Contains IP | Extracted IP   | Is Target IP | LLM  | File                                         |
+|----------------------------|-------------|----------------|--------------|------|----------------------------------------------|
+| flag                        | YES         | 192.168.17.65  | true         | Grok | flagBinaryConvert.js                         |
+| decryptedXOR                | NO          |                | false        | Grok | decryptedXORBinaryConvert.js                 |
+| decryptedXORSuperOfusDeadCode | NO       |                | false        | Grok | decryptedXORSuperOfusDeadCodeBinaryConvert.js|
+| decryptedXORDeadCode        | NO          |                | false        | Grok | decryptedXORDeadCodeBinaryConvert.js         |
+| obfus                       | YES         | 192.168.17.65  | true         | Grok | obfusBinaryConvert.js                        |
+| base64                      | YES         | 192.168.17.65  | true         | Grok | base64BinaryConvert.js                       |
+| decryptedSuperOfusDeadCode  | NO          |                | false        | Grok | decryptedSuperOfusDeadCodeBinaryConvert.js   |
+| superobfus                  | YES         | 192.168.17.65  | true         | Grok | superobfusBinaryConvert.js                   |
+| anonymize                   | YES         | 192.168.17.65  | true         | Grok | anonymizeBinaryConvert.js                    |
+| decrypted                   | NO          |                | false        | Grok | decryptedBinaryConvert.js                    |
+| decryptedDeadCode           | NO          |                | false        | Grok | decryptedDeadCodeBinaryConvert.js            |
+| decryptedXORVarOnly         | NO          |                | false        | Grok | decryptedXORVarOnlyBinaryConvert.js          |
+| decryptedVarOnly            | NO          |                | false        | Grok | decryptedVarOnlyBinaryConvert.js             |
 
 
 This format makes it straightforward to see, for each model and phase, whether it correctly finds the embedded IP, misses it, or hallucinates a different address.
