@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.phd.llm.model.ai21.AI21Model;
 import com.phd.llm.service.AI21Service;
 
+import io.swagger.v3.oas.annotations.Hidden;
 import jakarta.validation.Valid;
 
 @RestController
@@ -38,6 +39,7 @@ public class AI21Controller {
 		return new ResponseEntity<>(ai21Service.getAIResponse(text), HttpStatus.OK);
 	}
 
+    @Hidden
 	@RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE, value = "/getAll")
 	public @ResponseBody @ResponseStatus(code = HttpStatus.OK) ResponseEntity<List<AI21Model>> getAll() {
 

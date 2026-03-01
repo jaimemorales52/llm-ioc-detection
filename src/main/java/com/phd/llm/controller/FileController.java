@@ -21,6 +21,7 @@ import com.phd.llm.model.others.Categoria;
 import com.phd.llm.service.DirectoryService;
 import com.phd.llm.service.FileService;
 
+import io.swagger.v3.oas.annotations.Hidden;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 
@@ -87,6 +88,7 @@ public class FileController {
 		return ResponseEntity.ok("Finished process:");
 	}
 	
+    @Hidden
 	@RequestMapping(method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE, value = "/updaloadFolderToJson")
 	public ResponseEntity<String> handleFolderUploadtoJson(String directory,
 			@Parameter(description = "Select a category") @RequestParam(required = false, defaultValue = "") Categoria llmType, boolean ia) {

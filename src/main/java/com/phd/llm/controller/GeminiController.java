@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.phd.llm.model.gemini.GeminiModel;
 import com.phd.llm.service.GeminiService;
 
+import io.swagger.v3.oas.annotations.Hidden;
 import jakarta.validation.Valid;
 
 @RestController
@@ -42,6 +43,7 @@ public class GeminiController {
 		}
 	}
 	
+    @Hidden
 	@RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE, value = "/getAll")
 	public @ResponseBody @ResponseStatus(code = HttpStatus.OK) ResponseEntity<List<GeminiModel>> getAll() {
 

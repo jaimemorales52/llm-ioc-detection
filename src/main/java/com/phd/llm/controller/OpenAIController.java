@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.phd.llm.model.openai.OpenAIModel;
 import com.phd.llm.service.OpenAIService;
 
+import io.swagger.v3.oas.annotations.Hidden;
 import jakarta.validation.Valid;
 
 @RestController
@@ -37,12 +38,14 @@ public class OpenAIController {
 		return new ResponseEntity<>(openAIService.getOpenAIResponse(prompt), HttpStatus.OK);
 	}
 
+    @Hidden
 	@RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE, value = "/getAll")
 	public @ResponseBody @ResponseStatus(code = HttpStatus.OK) ResponseEntity<List<OpenAIModel>> getAll() {
 
 		return new ResponseEntity<>(openAIService.getAll(), HttpStatus.OK);
 	}
 
+    @Hidden
 	@RequestMapping(method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE, value = "/searchInformation")
 	public @ResponseBody @ResponseStatus(code = HttpStatus.OK) ResponseEntity<String> searchInformation(
 			@RequestBody @Valid String information) {

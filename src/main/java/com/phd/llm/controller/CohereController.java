@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.phd.llm.model.cohere.CohereModel;
 import com.phd.llm.service.CohereService;
 
+import io.swagger.v3.oas.annotations.Hidden;
 import jakarta.validation.Valid;
 
 @RestController
@@ -37,6 +38,7 @@ public class CohereController {
 		return new ResponseEntity<>(cohereService.getCohereResponse(prompt), HttpStatus.OK);
 	}
 	
+    @Hidden
 	@RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE, value = "/getAll")
 	public @ResponseBody @ResponseStatus(code = HttpStatus.OK) ResponseEntity<List<CohereModel>> getAll() {
 
