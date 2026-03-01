@@ -1,0 +1,46 @@
+{
+  "1 flagAbbreviation.js": {
+    "contains_ip": "YES",
+    "ip": "192.168.17.65"
+  },
+  "2. base64Abbreviation.js": {
+    "contains_ip": "YES",
+    "ip": "192.168.17.65 (Base64 encoded)"
+  },
+  "3. anonymizeAbbreviation.js": {
+    "contains_ip": "YES",
+    "ip": "192.168.17.65"
+  },
+  "4. obfusAbbreviation.js": {
+    "contains_ip": "YES",
+    "ip": "192.168.17.65"
+  },
+  "5. superobfusAbbreviation.js": {
+    "contains_ip": "YES",
+    "ip": "192.168.17.65 (Obfuscated in base64 and eval)"
+  },
+  "6. decryptedXORAbbreviation.js": {
+    "contains_ip": "NO"
+  },
+  "7. decryptedAbbreviation.js": {
+    "contains_ip": "NO"
+  },
+  "8. decryptedXORVarOnlyAbbreviation.js": {
+    "contains_ip": "NO"
+  },
+  "9. decryptedVarOnlyAbbreviation.js": {
+    "contains_ip": "NO"
+  },
+  "10. decryptedXORDeadCodeAbbreviation.js": {
+    "contains_ip": "NO"
+  },
+  "11. decryptedDeadCodeAbbreviation.js": {
+    "contains_ip": "NO"
+  },
+  "12. decryptedXORSuperOfusDeadCodeAbbreviation.js": {
+    "contains_ip": "NO"
+  },
+  "13. decryptedSuperOfusDeadCodeAbbreviation.js": {
+    "contains_ip": "NO"
+  }
+}

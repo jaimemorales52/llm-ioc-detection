@@ -1,0 +1,205 @@
+package com.phd.llm.model.openai;
+
+import java.util.List;
+
+//import org.springframework.data.mongodb.core.mapping.Document;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import lombok.Data;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
+@Data
+//@Document(collection = "openai")
+public class OpenAIModel {
+
+    @JsonProperty("id")
+    private String id;
+
+    @JsonProperty("object")
+    private String object;
+
+    @JsonProperty("created")
+    private long created;
+
+    @JsonProperty("model")
+    private String model;
+
+    @JsonProperty("choices")
+    private List<Choice> choices;
+
+    @JsonProperty("usage")
+    private Usage usage;
+
+    @JsonProperty("system_fingerprint")
+    private String systemFingerprint;
+
+    // Getters and Setters
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getObject() {
+        return object;
+    }
+
+    public void setObject(String object) {
+        this.object = object;
+    }
+
+    public long getCreated() {
+        return created;
+    }
+
+    public void setCreated(long created) {
+        this.created = created;
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
+    }
+
+    public List<Choice> getChoices() {
+        return choices;
+    }
+
+    public void setChoices(List<Choice> choices) {
+        this.choices = choices;
+    }
+
+    public Usage getUsage() {
+        return usage;
+    }
+
+    public void setUsage(Usage usage) {
+        this.usage = usage;
+    }
+
+    public String getSystemFingerprint() {
+        return systemFingerprint;
+    }
+
+    public void setSystemFingerprint(String systemFingerprint) {
+        this.systemFingerprint = systemFingerprint;
+    }
+
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    public static class Choice {
+        @JsonProperty("index")
+        private int index;
+
+        @JsonProperty("message")
+        private Message message;
+
+        @JsonProperty("logprobs")
+        private Object logprobs; // This can be a more specific type if you know the structure
+
+        @JsonProperty("finish_reason")
+        private String finishReason;
+
+        // Getters and Setters
+        public int getIndex() {
+            return index;
+        }
+
+        public void setIndex(int index) {
+            this.index = index;
+        }
+
+        public Message getMessage() {
+            return message;
+        }
+
+        public void setMessage(Message message) {
+            this.message = message;
+        }
+
+        public Object getLogprobs() {
+            return logprobs;
+        }
+
+        public void setLogprobs(Object logprobs) {
+            this.logprobs = logprobs;
+        }
+
+        public String getFinishReason() {
+            return finishReason;
+        }
+
+        public void setFinishReason(String finishReason) {
+            this.finishReason = finishReason;
+        }
+
+        @JsonIgnoreProperties(ignoreUnknown = true)
+        public static class Message {
+            @JsonProperty("role")
+            private String role;
+
+            @JsonProperty("content")
+            private String content;
+
+            // Getters and Setters
+            public String getRole() {
+                return role;
+            }
+
+            public void setRole(String role) {
+                this.role = role;
+            }
+
+            public String getContent() {
+                return content;
+            }
+
+            public void setContent(String content) {
+                this.content = content;
+            }
+        }
+    }
+
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    public static class Usage {
+        @JsonProperty("prompt_tokens")
+        private int promptTokens;
+
+        @JsonProperty("completion_tokens")
+        private int completionTokens;
+
+        @JsonProperty("total_tokens")
+        private int totalTokens;
+
+        // Getters and Setters
+        public int getPromptTokens() {
+            return promptTokens;
+        }
+
+        public void setPromptTokens(int promptTokens) {
+            this.promptTokens = promptTokens;
+        }
+
+        public int getCompletionTokens() {
+            return completionTokens;
+        }
+
+        public void setCompletionTokens(int completionTokens) {
+            this.completionTokens = completionTokens;
+        }
+
+        public int getTotalTokens() {
+            return totalTokens;
+        }
+
+        public void setTotalTokens(int totalTokens) {
+            this.totalTokens = totalTokens;
+        }
+    }
+}
